@@ -36,7 +36,7 @@ class CreateJobListing extends Controller
         ]);
 
         //use events
-        return redirect('admin/dashboard');
+        return redirect('admin/dashboard')->with('status', 'Job listing has been added successfully');
     }
 
     public function update(Request $request)
@@ -63,7 +63,7 @@ class CreateJobListing extends Controller
             'type' => $request->type,
         ]);
 
-        return redirect('admin/dashboard');
+        return redirect('admin/dashboard')->with('success', 'Job listing updated successfully.');
     }
 
     public function delete(Request $request){
