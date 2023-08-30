@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\JobListing;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 class CreateJobListing extends Controller
 {
     public function index()
     {
-        $jobListings = JobListing::all();
-        return view('job-listings.index', compact('jobListings'));
+        $listings = JobListing::all();
+        return view('job-listings.index', compact('listings'));
     }
+    public function create()
+    {
+        return view('job-listings.create');
+    }
+
     public function store(Request $request){
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -23,20 +31,23 @@ class CreateJobListing extends Controller
             'schedule' => ['required', 'string', 'max:255'],
             'type' => ['required', 'string', 'max:255'],
         ]);
+        $date = Carbon::createFromFormat('m/d/Y', $request->deadline);
+        $formattedDate = $date->format('Y-m-d H:i:s');
 
         $listing = JobListing::create([
+            'user_id' => Auth::id(),
             'title' => $request->title,
             'description' => $request->description,
             'requirements' => $request->requirements,
             'location' => $request->location,
             'salary' => $request->salary,
-            'deadline' => $request->deadline,
+            'deadline' => $formattedDate,
             'schedule' => $request->schedule,
             'type' => $request->type,
         ]);
 
         //use events
-        return redirect('admin/dashboard')->with('status', 'Job listing has been added successfully');
+        return redirect('dashboard')->with('status', 'Job listing has been added successfully');
     }
 
     public function update(Request $request)
