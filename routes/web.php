@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/listings', [CreateJobListing::class, 'index'])->name('listings');
     Route::get('/create', [CreateJobListing::class, 'create'])->name('create');
     Route::post('/store', [CreateJobListing::class, 'store'])->name('store');
+    Route::post('/search', [SearchListings::class, 'search'])->name('search');
+
 
 });
 
