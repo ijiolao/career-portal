@@ -14,32 +14,38 @@
                     <div class="table border-collapse table-auto w-full text-sm">
                       <div class="table-header-group">
                         <div class="table-row">
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Created By</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Job Title</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Location</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Salary</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Job Type</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Deadline</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Date Created</div>
-                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Edit</div>
+                            <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">
+                                <form method="post" action="{{ route('delete') }}" class="mt-6 space-y-6">
+                                    @csrf
+                                    <x-primary-button>{{ __('Delete') }}</x-primary-button>
+                            </div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pl-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Created By</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pt-4 pb-3 text-slate-400 dark:text-slate-200 text-left">Job Title</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Location</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Salary</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Job Type</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Deadline</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Date Created</div>
+                          <div class="table-cell border-b dark:border-slate-600 font-medium p-4 pr-4 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left">Edit</div>
 
                         </div>
                       </div>
                       <div class="table-row-group bg-white dark:bg-slate-800">
                         @foreach ($listings as $listing)
                         <div class="table-row">
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"></div>
+                            <input type="checkbox" class="ml-10 border-slate-400" name="ids[]" value="{{$listing->id}}" />
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pl-4 text-slate-500 dark:text-slate-400">{{$listing->name}}</div>
                             <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 text-slate-500 dark:text-slate-400">{{$listing->title}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">{{$listing->location}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">{{$listing->salary}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">{{$listing->type}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">{{$listing->deadline}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400">{{$listing->created_at}}</div>
-                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-8 text-slate-500 dark:text-slate-400"><a href="listings/edit/{{$listing->id}}">Edit</a></div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400">{{$listing->location}}</div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400">{{$listing->salary}}</div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400">{{$listing->type}}</div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400">{{$listing->deadline}}</div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400">{{$listing->created_at}}</div>
+                            <div class="table-cell border-b border-slate-100 dark:border-slate-700 p-4 pr-4 text-slate-500 dark:text-slate-400"><a href="listings/edit/{{$listing->id}}">Edit</a></div>
 
                         </div>
                         @endforeach
-                        
+                    </form>
                       </div>
                     </div>
                   </div>

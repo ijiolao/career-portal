@@ -30,7 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/listings', [CreateJobListing::class, 'index'])->name('listings');
     Route::get('/create', [CreateJobListing::class, 'create'])->name('create');
     Route::post('/store', [CreateJobListing::class, 'store'])->name('store');
+    Route::get('/listings/edit/{job_id}/', [CreateJobListing::class, 'edit'])->name('edit');
+    Route::post('/update', [CreateJobListing::class, 'update'])->name('update');
+    Route::post('/delete', [CreateJobListing::class, 'delete'])->name('delete');
     Route::post('/search', [SearchListings::class, 'search'])->name('search');
+    
+
+    //frontend
+    //Route::livewire('/listings', [Listings::class, 'listings'])->name('listings');
+
 
 
 });

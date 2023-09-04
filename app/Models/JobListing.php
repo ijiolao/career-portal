@@ -35,4 +35,10 @@ class JobListing extends Model
             'deadline' => $this->deadline,
         ];
     }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }
